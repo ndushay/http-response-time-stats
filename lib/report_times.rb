@@ -3,6 +3,7 @@ include Benchmark  # need the CAPTION and FORMAT constants
 
 require 'http_and_parse'
 
+# benchmark http response times
 class ReportTimes
 
   attr_reader :url, :count

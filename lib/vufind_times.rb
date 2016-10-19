@@ -1,6 +1,7 @@
 require 'report_times'
 require 'active_support/core_ext/object/to_query.rb'
 
+# benchmark vufind.pl response times
 class VufindTimes < ReportTimes
   attr_reader :ckey, :count
 
@@ -15,10 +16,6 @@ class VufindTimes < ReportTimes
   end
 
   private
-
-  def url
-    @url ||= "#{base_url}?#{query_str}"
-  end
 
   def query_str
     @query_str ||= static_params.merge(id: ckey).to_query
