@@ -1,4 +1,5 @@
 require 'faraday'
+require 'json'
 
 class HttpAndParse
 
@@ -17,9 +18,10 @@ class HttpAndParse
   end
 
   def parse_json
-    return unless response.success?
+    abort("HTTP response code is #{response.status}") unless response.success?
     JSON.parse(response.body)
   rescue JSON::ParserError
+    abort("unable to parse JSON")
   end
 
 end
