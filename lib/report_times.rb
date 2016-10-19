@@ -13,18 +13,40 @@ class ReportTimes
   end
 
   def benchmark
-    Benchmark.benchmark(CAPTION, 7, FORMAT, ">avg resp (real):", ">avg parse (real):") do |x|
+    Benchmark.benchmark(CAPTION, 7, FORMAT, ">avg resp:") do |x|
+      total_resp = Benchmark::Tms.new
+      count.times.each { |i|
+        hp = HttpAndParse.new(url)
+        resp_t = x.report("response #{i}:") { hp.response }
+        total_resp += resp_t
+      }
+      p '-----------------'
+      [total_resp/count]
+    end
+    nil
+  end
+
+  def benchmark_w_json
+    Benchmark.benchmark(CAPTION, 7, FORMAT, ">avg resp:", ">avg parse:") do |x|
       total_resp = Benchmark::Tms.new
       total_parse = Benchmark::Tms.new
       count.times.each { |i|
         hp = HttpAndParse.new(url)
-        resp_t = x.report("resp #{i}:") { hp.response }
+        resp_t = x.report("response #{i}:") { hp.response }
         parse_t = x.report("parse #{i}:") { hp.parse_json }
         total_resp += resp_t
         total_parse += parse_t
       }
+      p '-----------------'
       [total_resp/count, total_parse/count]
     end
+    nil
+  end
+
+  private
+
+  def url
+    @url ||= "#{base_url}?#{query_str}"
   end
 
 end
