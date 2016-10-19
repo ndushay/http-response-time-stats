@@ -14,6 +14,7 @@ class ReportTimes
   end
 
   def benchmark
+    p "will benchmark: #{url}"
     Benchmark.benchmark(CAPTION, 7, FORMAT, ">avg resp:") do |x|
       total_resp = Benchmark::Tms.new
       count.times.each { |i|
@@ -28,6 +29,7 @@ class ReportTimes
   end
 
   def benchmark_w_json
+    p "will benchmark: #{url}"
     Benchmark.benchmark(CAPTION, 7, FORMAT, ">avg resp:", ">avg parse:") do |x|
       total_resp = Benchmark::Tms.new
       total_parse = Benchmark::Tms.new
