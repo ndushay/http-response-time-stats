@@ -10,15 +10,12 @@ class HttpAndParse
   end
 
   def response
-    @response ||= begin
-      Faraday.get(url)
-    rescue Faraday::Error::ConnectionFailed
-      NullResponse.new
-    end
+    @response ||= Faraday.get(url)
+    abort("bad response code #{@response.status}") unless @response.success?
+    @response
   end
 
   def parse_json
-    abort("HTTP response code is #{response.status}") unless response.success?
     JSON.parse(response.body)
   rescue JSON::ParserError
     abort("unable to parse JSON")
