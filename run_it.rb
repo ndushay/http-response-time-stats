@@ -23,7 +23,7 @@ barcodes = [
   {'36105115968856' => 'SPEC-COLL'} # Ginsberg, SPEC-COLL
 ]
 
-count = 20
+count = 10
 
 require 'vufind_times'
 require 'requests_pl_times'
