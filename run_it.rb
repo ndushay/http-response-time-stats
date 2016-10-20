@@ -23,7 +23,7 @@ barcodes = [
   {'36105115968856' => 'SPEC-COLL'} # Ginsberg, SPEC-COLL
 ]
 
-count = 10
+count = 10  # 10 is plenty;  the times aren't that variable
 
 require 'vufind_times'
 require 'requests_pl_times'
@@ -45,8 +45,6 @@ ckeys.each { |ckey_entry|
   st = SymwsTimes.new(ckey, library, count)
   st.benchmark_no_library
   p "---------------------------------------"
-  st.benchmark
-  p "---------------------------------------"
   st.benchmark_w_json
 
   p '================================================'
@@ -63,8 +61,6 @@ barcodes.each { |barcode_entry|
 
   st = SymwsTimes.new(barcode, library, count)
   st.benchmark_no_library
-  p "---------------------------------------"
-  st.benchmark
   p "---------------------------------------"
   st.benchmark_w_json
   p "---------------------------------------"
