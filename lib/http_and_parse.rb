@@ -14,7 +14,7 @@ class HttpAndParse
       req.url url
       # need the below for symws catalog/item/barcode
       req.headers['x-sirs-clientID'] = 'DS_CLIENT'
-      req.headers['sd-originating-app-id'] = 'searchwors'
+      req.headers['sd-originating-app-id'] = 'response-time-stats'
       req.headers['SD-Preferred-Role'] = 'GUEST'
     end
     abort("bad response code #{@response.status}") unless @response.success?
