@@ -41,17 +41,15 @@ class SymwsTimes < ReportTimes
   end
 
   def query_str
-    @query_str ||= begin
-      moar = {
-        libraryFilter: library
-      }
-      if barcode
-        moar.merge!(itemID: barcode)
-      elsif ckey
-        moar.merge!(titleID: ckey)
-      end
-      static_params.merge(moar).to_query
+    moar = {
+      libraryFilter: library
+    }
+    if barcode
+      moar.merge!(itemID: barcode)
+    elsif ckey
+      moar.merge!(titleID: ckey)
     end
+    static_params.merge(moar).to_query
   end
 
   def base_url
